@@ -17,12 +17,18 @@ def vmrc_input():
 
     #pyautogui.click(x=320, y=295, clicks=1, button='left')
     password_input = pyautogui.locateOnScreen('/home/<user>/Pictures/vmrcpassword.png')
+    password_input2 = pyautogui.locateOnScreen('/home/smarthome/Bilder/vmrcpassword2.png')
 
-    if password_input is not None:
-        password_input_center = pyautogui.center(password_input)
-        pyautogui.click(password_input_center)
-    else:
-        return 0
+    while True:
+        if password_input is not None:
+            password_input_center = pyautogui.center(password_input)
+            pyautogui.click(password_input_center)
+            break
+        elif password_input2 is not None:
+            password_input_center = pyautogui.center(password_input2)
+            pyautogui.click(password_input_center)
+            break
+        time.sleep(1)
 
     debug = subprocess.run('setxkbmap de', shell=True)
     print(debug.returncode)
