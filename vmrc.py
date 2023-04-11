@@ -17,7 +17,7 @@ def vmrc_input():
 
     #pyautogui.click(x=320, y=295, clicks=1, button='left')
     password_input = pyautogui.locateOnScreen('/home/<user>/Pictures/vmrcpassword.png')
-    password_input2 = pyautogui.locateOnScreen('/home/smarthome/Bilder/vmrcpassword2.png')
+    password_input2 = pyautogui.locateOnScreen('/home/<user>/Bilder/vmrcpassword2.png')
 
     while True:
         if password_input is not None:
