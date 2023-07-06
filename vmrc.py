@@ -5,7 +5,8 @@ import subprocess
 from pynput.keyboard import Controller
 import multiprocessing
 
-
+pyautogui.FAILSAFE = False
+ACCURACY = 0.80
 keyboard = Controller()
 
 def beamer_shell():
@@ -15,11 +16,13 @@ def beamer_shell():
 def vmrc_input():
     time.sleep(6)
 
-    #pyautogui.click(x=320, y=295, clicks=1, button='left')
-    password_input = pyautogui.locateOnScreen('/home/<user>/Pictures/vmrcpassword.png')
-    password_input2 = pyautogui.locateOnScreen('/home/<user>/Bilder/vmrcpassword2.png')
+    pyautogui.click(x=1000, y=800, clicks=1, button='left')
 
-    while True:
+    password_input_center = None
+    while (password_input_center == None):
+        password_input = pyautogui.locateOnScreen('/home/<user>/<path_to_picture>/vmrcpassword.png', confidence=ACCURACY)
+        password_input2 = pyautogui.locateOnScreen('/home/<user>/<path_to_picture>/vmrcpassword2.png', confidence=ACCURACY)
+
         if password_input is not None:
             password_input_center = pyautogui.center(password_input)
             pyautogui.click(password_input_center)
@@ -36,14 +39,14 @@ def vmrc_input():
     time.sleep(2)
 
     if debug.returncode == 0:
-        keyboard.type("<password>")
+        keyboard.type("^y7]q>sFV-'9.Dr_k^Ubwcb5$Wt#\YC8")
     else:
-        return 0
+        raise Exception('Cannot enter the correct password because using wrong keyboard layout!')
 
     time.sleep(3)
 
     #pyautogui.click(x=475, y=340, clicks=1, button='left')
-    connect_button = pyautogui.locateOnScreen('/home/<user>/Pictures/vmrcconnect.png')
+    connect_button = pyautogui.locateOnScreen('/home/<user>/<path_to_picture>/vmrcconnect.png', confidence=ACCURACY)
 
     if connect_button is not None:
         connect_button_center = pyautogui.center(connect_button)
